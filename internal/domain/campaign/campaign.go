@@ -19,7 +19,7 @@ type Campaign struct {
 	Contacts  []Contact
 }
 
-func NewCampaing(name string, content string, emails []string) (*Campaign, error) {
+func NewCampaign(name string, content string, emails []string) (*Campaign, error) {
 
 	if name == "" {
 		return nil, errors.New("name is required")
