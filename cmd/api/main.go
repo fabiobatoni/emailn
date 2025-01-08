@@ -14,6 +14,7 @@ type product struct {
 
 func main() {
 	r := chi.NewRouter()
+	r.Use(myMiddleware)
 	r.Get("/{productName}", func(w http.ResponseWriter, r *http.Request) {
 		param := chi.URLParam(r, "productName")
 		w.Write([]byte(param))
@@ -32,4 +33,12 @@ func main() {
 	})
 
 	http.ListenAndServe(":3000", r)
+}
+
+func myMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		println("before")
+		next.ServeHTTP(w, r)
+		println("after")
+	})
 }
