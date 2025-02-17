@@ -2,6 +2,7 @@ package endpoints
 
 import (
 	internalerrors "emailn/internal/InternalErrors"
+	"encoding/json"
 	"errors"
 	"net/http"
 	"net/http/httptest"
@@ -37,4 +38,24 @@ func Test_HandlerError_when_endpoint_returns_domain_error(t *testing.T) {
 	handlerFunc.ServeHTTP(res, req)
 	assert.Equal(http.StatusBadRequest, res.Code)
 	assert.Contains(res.Body.String(), "domain error")
+}
+
+func Test_HandlerError_when_endpoint_returns_obj_and_status(t *testing.T) {
+	assert := assert.New(t)
+	type BodyForTest struct {
+		Id int
+	}
+	objExpected := BodyForTest{Id: 2}
+	endpoint := func(w http.ResponseWriter, r *http.Request) (interface{}, int, error) {
+		return objExpected, 201, nil
+	}
+	handlerFunc := HandlerError(endpoint)
+	req, _ := http.NewRequest("GET", "/", nil)
+	res := httptest.NewRecorder()
+
+	handlerFunc.ServeHTTP(res, req)
+	assert.Equal(http.StatusCreated, res.Code)
+	objReturned := BodyForTest{}
+	json.Unmarshal(res.Body.Bytes(), &objReturned)
+	assert.Equal(objExpected, objReturned)
 }
