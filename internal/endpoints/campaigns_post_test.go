@@ -3,6 +3,7 @@ package endpoints
 import (
 	"bytes"
 	"emailn/internal/contract"
+	internalmock "emailn/internal/test/mock"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -13,20 +14,6 @@ import (
 	"github.com/stretchr/testify/mock"
 )
 
-type serviceMock struct {
-	mock.Mock
-}
-
-func (r *serviceMock) Create(newCampaign contract.NewCampaign) (string, error) {
-	args := r.Called(newCampaign)
-	return args.String(0), args.Error(1)
-}
-
-func (r *serviceMock) GetBy(id string) (*contract.CampaignResponse, error) {
-	//args := r.Called(id)
-	return nil, nil
-}
-
 func Test_CampaignsPost_should_save_new_campaign(t *testing.T) {
 	assert := assert.New(t)
 	body := contract.NewCampaign{
@@ -34,7 +21,7 @@ func Test_CampaignsPost_should_save_new_campaign(t *testing.T) {
 		Content: "Hi everyone!",
 		Emails:  []string{"test@test.com"},
 	}
-	service := new(serviceMock)
+	service := new(internalmock.CampaignServiceMock)
 	service.On("Create", mock.MatchedBy(func(request contract.NewCampaign) bool {
 		if request.Name == body.Name && request.Content == body.Content {
 			return true
@@ -62,7 +49,7 @@ func Test_CampaignsPost_should_inform_error_when_exist(t *testing.T) {
 		Content: "Hi everyone!",
 		Emails:  []string{"test@test.com"},
 	}
-	service := new(serviceMock)
+	service := new(internalmock.CampaignServiceMock)
 	service.On("Create", mock.Anything).Return("", fmt.Errorf("error"))
 	handler := Handler{CampaignService: service}
 
