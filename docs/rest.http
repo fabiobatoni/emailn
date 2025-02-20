@@ -1,10 +1,10 @@
 POST http://localhost:3000/campaigns
 
 {
-    "name": "mouse",
+    "name": "change",
     "content": "change password",
-    "emails": ["teste@teste.com.br"]
+    "emails": ["fabiobatoni@teste.com.br"]
 }
 
 ###
-GET http://localhost:3000/campaigns
+GET http://localhost:3000/campaigns/curke966m384pl6m2d50
