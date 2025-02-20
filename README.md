@@ -1,4 +1,7 @@
 # EMAILN
+- gorm
+- go chi
+- testify
 
 - Project with Golang
 

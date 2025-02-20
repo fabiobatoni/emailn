@@ -8,3 +8,6 @@ POST http://localhost:3000/campaigns
 
 ###
 GET http://localhost:3000/campaigns/curke966m384pl6m2d50
+
+###
+PATCH http://localhost:3000/campaigns/cancel/curke966m384pl6m2d50
