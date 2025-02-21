@@ -33,6 +33,7 @@ func (c *CampaignRepository) GetBy(id string) (*campaign.Campaign, error) {
 }
 
 func (c *CampaignRepository) Delete(campaign *campaign.Campaign) error {
-	tx := c.Db.Delete(campaign)
+
+	tx := c.Db.Select("Contacts").Delete(campaign)
 	return tx.Error
 }

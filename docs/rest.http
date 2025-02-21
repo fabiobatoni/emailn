@@ -3,14 +3,14 @@ POST http://localhost:3000/campaigns
 {
     "name": "change",
     "content": "change password",
-    "emails": ["fabiobatoni@teste.com.br"]
+    "emails": ["fabiobatoni@teste.com.br", "fabio@teste.com"]
 }
 
 ###
-GET http://localhost:3000/campaigns/cusah066m382th6dg59g
+GET http://localhost:3000/campaigns/cusaui66m381qt7ene20
 
 ###
 PATCH http://localhost:3000/campaigns/cancel/curke966m384pl6m2d50
 
 ###
-DELETE http://localhost:3000/campaigns/delete/cusah066m382th6dg59g
+DELETE http://localhost:3000/campaigns/delete/cusaui66m381qt7ene20
