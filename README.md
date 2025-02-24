@@ -2,6 +2,7 @@
 - gorm
 - go chi
 - testify
+- air
 
 - Project with Golang
 
