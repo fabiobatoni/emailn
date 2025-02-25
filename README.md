@@ -3,6 +3,7 @@
 - go chi
 - testify
 - air
+- Keycloak
 
 - Project with Golang
 
