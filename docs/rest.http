@@ -1,10 +1,13 @@
+@url = http://localhost:3000
+@identity_provider = http://localhost:8080
+
 ###
-GET http://localhost:3000/ping
+GET {{url}}/ping
 
 ###
 
-POST http://localhost:3000/campaigns
-Authorization: Bearer ererarea
+POST {{url}}/campaigns
+Authorization: Bearer {{access_token}}
 
 {
     "name": "change",
@@ -13,18 +16,23 @@ Authorization: Bearer ererarea
 }
 
 ###
-GET http://localhost:3000/campaigns/cuu7a9u6m383cj56tl1g
+GET {{url}}/campaigns/cuu7a9u6m383cj56tl1g
+Authorization: Bearer {{access_token}}
 
 ###
-PATCH http://localhost:3000/campaigns/cancel/curke966m384pl6m2d50
+PATCH {{url}}/campaigns/cancel/curke966m384pl6m2d50
+Authorization: Bearer {{access_token}}
 
 ###
-DELETE http://localhost:3000/campaigns/delete/cusaui66m381qt7ene20
+DELETE {{url}}/campaigns/delete/cusaui66m381qt7ene20
+Authorization: Bearer {{access_token}}
 
 ###
-
-POST http://localhost:8080/realms/provider/protocol/openid-connect/token
+# @name token
+POST {{identity_provider}}/realms/provider/protocol/openid-connect/token
 Content-Type: application/x-www-form-urlencoded
 
 client_id=emailn&username={email}&password={password}&grant_type=password
 
+###
+@access_token = {{token.response.body.access_token}}
