@@ -4,6 +4,7 @@
 - testify
 - air
 - Keycloak
+- Go-oidc
 
 - Project with Golang
 
