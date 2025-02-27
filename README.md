@@ -5,6 +5,7 @@
 - air
 - Keycloak
 - Go-oidc
+- jwt-go
 
 - Project with Golang
 

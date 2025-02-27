@@ -8,6 +8,7 @@ require (
 	github.com/ajg/form v1.5.1 // indirect
 	github.com/coreos/go-oidc/v3 v3.12.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
 	github.com/gabriel-vasile/mimetype v1.4.3 // indirect
 	github.com/go-chi/chi/v5 v5.2.0 // indirect
 	github.com/go-chi/render v1.0.3 // indirect
