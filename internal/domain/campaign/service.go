@@ -19,7 +19,8 @@ type ServiceImp struct {
 
 func (s *ServiceImp) Create(newCampaign contract.NewCampaign) (string, error) {
 
-	campaign, err := NewCampaign(newCampaign.Name, newCampaign.Content, newCampaign.Emails)
+	// TODO: fix arg createBy Email
+	campaign, err := NewCampaign(newCampaign.Name, newCampaign.Content, newCampaign.Emails, "")
 
 	if err != nil {
 		return "", err
