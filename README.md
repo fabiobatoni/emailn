@@ -6,6 +6,7 @@
 - Keycloak
 - Go-oidc
 - jwt-go
+- go-dotenv
 
 - Project with Golang
 
