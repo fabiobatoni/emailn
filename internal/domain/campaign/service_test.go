@@ -149,13 +149,12 @@ func Test_Delete_ReturnRecordNotFound_When_campaign_does_not_exist(t *testing.T)
 
 func Test_Delete_ReturnCampaignStatusInvalid_when_campaign_has_status_not_equals_pending(t *testing.T) {
 	setUp()
-	assert := assert.New(t)
 
-	repositoryMock.On("GetBy", mock.Anything).Return(campaignStarted, nil)
+	setUpGetByIdRepositoryBy(campaignStarted)
 
 	err := service.Delete(campaignStarted.ID)
 
-	assert.Equal("Campaign status invalid", err.Error())
+	assert.Equal(t,"Campaign status invalid", err.Error())
 }
 
 func Test_Delete_ReturnInternalError_when_delete_has_problem(t *testing.T) {
