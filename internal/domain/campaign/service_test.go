@@ -91,6 +91,24 @@ func Test_Create_ValidateRepositorySave(t *testing.T) {
 	assert.True(errors.Is(internalerrors.ErrInternal, err))
 }
 
+func setUpGetByIdRepositoryBy(campaign *campaign.Campaign) {
+	repositoryMock.On("GetBy", mock.Anything).Return(campaign, nil)
+}
+
+func setUpUpdateRepository() {
+	repositoryMock.On("Update", mock.Anything).Return(nil)
+}
+
+func setUpSendEmailWithSuccess() {
+	sendMail := func(campaign * campaign.Campaign) error {
+		return nil
+	}
+
+	service.SendMail = sendMail
+}
+
+// Method_Context_ReturnOrAction
+
 func Test_GetById_ReturnCampaign(t *testing.T) {
 	setUp()
 	assert := assert.New(t)
