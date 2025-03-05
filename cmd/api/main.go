@@ -4,7 +4,6 @@ import (
 	"emailn/internal/domain/campaign"
 	"emailn/internal/endpoints"
 	"emailn/internal/infrastructure/database"
-	"emailn/internal/infrastructure/mail"
 	"log"
 	"net/http"
 
@@ -19,14 +18,6 @@ func main() {
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
-
-	errMail := mail.SendMail()
-
-	if errMail != nil {
-		log.Fatal("Error sendMail", errMail.Error())
-	}
-
-	return
 
 	r := chi.NewRouter()
 
