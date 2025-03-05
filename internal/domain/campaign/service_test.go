@@ -22,15 +22,20 @@ var (
 		Emails:  []string{"teste1@test.com"},
 		CreatedBy: "teste@teste.com.br",
 	}
+	repositoryMock *internalmock.CampaignRepositoryMock
 	service = campaign.ServiceImp{}
 )
 
+func setUp() {
+	repositoryMock = new(internalmock.CampaignRepositoryMock)
+	service.Repository = repositoryMock
+}
+
 func Test_Create_Campaign(t *testing.T) {
+	setUp()
 	assert := assert.New(t)
-	repositoryMock := new(internalmock.CampaignRepositoryMock)
 
 	repositoryMock.On("Create", mock.Anything).Return(nil)
-	service.Repository = repositoryMock
 
 	id, err := service.Create(newCampaign)
 
@@ -39,6 +44,7 @@ func Test_Create_Campaign(t *testing.T) {
 }
 
 func Test_Create_Validate_Domain_Error(t *testing.T) {
+	setUp()
 	assert := assert.New(t)
 
 	_, err := service.Create(contract.NewCampaign{})
@@ -47,9 +53,7 @@ func Test_Create_Validate_Domain_Error(t *testing.T) {
 }
 
 func Test_Create_Save_Campaign(t *testing.T) {
-
-	repositoryMock := new(internalmock.CampaignRepositoryMock)
-
+	setUp()
 	repositoryMock.On("Create", mock.MatchedBy(func(campaign *campaign.Campaign) bool {
 
 		if campaign.Name != newCampaign.Name {
@@ -62,7 +66,6 @@ func Test_Create_Save_Campaign(t *testing.T) {
 
 		return true
 	})).Return(nil)
-	service.Repository = repositoryMock
 
 	service.Create(newCampaign)
 
@@ -70,13 +73,10 @@ func Test_Create_Save_Campaign(t *testing.T) {
 }
 
 func Test_Create_ValidateRepositorySave(t *testing.T) {
-
+	setUp()
 	assert := assert.New(t)
 
-	repositoryMock := new(internalmock.CampaignRepositoryMock)
-
 	repositoryMock.On("Create", mock.Anything).Return(errors.New("error to save on database"))
-	service.Repository = repositoryMock
 
 	_, err := service.Create(newCampaign)
 
