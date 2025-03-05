@@ -11,6 +11,7 @@ type Service interface {
 	GetBy(id string) (*contract.CampaignResponse, error)
 	Cancel(id string) error
 	Delete(id string) error
+	Start(id string) error
 }
 
 type ServiceImp struct {

@@ -28,6 +28,11 @@ DELETE {{url}}/campaigns/delete/cusaui66m381qt7ene20
 Authorization: Bearer {{access_token}}
 
 ###
+
+PATCH {{url}}/campaigns/start/cusaui66m381qt7ene20
+Authorization: Bearer {{access_token}}
+
+###
 # @name token
 POST {{identity_provider}}/realms/provider/protocol/openid-connect/token
 Content-Type: application/x-www-form-urlencoded
