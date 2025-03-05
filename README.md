@@ -7,6 +7,7 @@
 - Go-oidc
 - jwt-go
 - go-dotenv
+- go-mail
 
 - Project with Golang
 
