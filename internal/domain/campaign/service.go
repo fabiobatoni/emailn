@@ -96,6 +96,21 @@ func (s *ServiceImp) Delete(id string) error {
 	return nil
 }
 
+// Todo make unit test
+func (s *ServiceImp) SendEmailAndUpdateStatus(campaignSaved *Campaign) {
+
+	err := s.SendMail(campaignSaved)
+
+	if err != nil {
+		campaignSaved.Fail()
+	} else {
+		campaignSaved.Done()
+	}
+	s.Repository.Update(campaignSaved)
+
+}
+
+// Todo make unit test
 func (s *ServiceImp) Start(id string) error {
 	campaignSaved, err := s.Repository.GetBy(id)
 
