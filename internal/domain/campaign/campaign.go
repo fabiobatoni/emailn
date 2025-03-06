@@ -11,6 +11,7 @@ const (
 	Pending   string = "Pending"
 	Canceled  string = "Canceled"
 	Started   string = "Started"
+	Failed    string = "Failed"
 	Done      string = "Done"
 	Deleted   string = "Deleted"
 )
@@ -41,6 +42,14 @@ func (c *Campaign) Cancel() {
 
 func (c *Campaign) Delete() {
 	c.Status = Deleted
+}
+
+func (c *Campaign) Fail() {
+	c.Status = Failed
+}
+
+func (c *Campaign) Started() {
+	c.Status = Started
 }
 
 
