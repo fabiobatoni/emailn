@@ -16,8 +16,19 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
-	database.NewDb()
-	//repository := database.CampaignRepository{Db: db}
+	db := database.NewDb()
+	repository := database.CampaignRepository{Db: db}
+	campaigns, err := repository.GetCampaignsToBeSent()
+
+	if err != nil {
+		println(err.Error())
+	}
+
+	println(len(campaigns))
+
+	for _, campaign := range campaigns {
+		println(campaign.ID)
+	}
 
 	//for {
 	//	campaigns, _ := repository.GetCampaignsToBeSent()

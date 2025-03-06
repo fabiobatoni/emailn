@@ -37,7 +37,7 @@ Authorization: Bearer {{access_token}}
 POST {{identity_provider}}/realms/provider/protocol/openid-connect/token
 Content-Type: application/x-www-form-urlencoded
 
-client_id=emailn&username={email}&password={password}&grant_type=password
+client_id=emailn&username={email}&password=12345&grant_type=password
 
 ###
 @access_token = {{token.response.body.access_token}}
