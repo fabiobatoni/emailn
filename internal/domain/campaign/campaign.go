@@ -35,22 +35,27 @@ type Campaign struct {
 
 func (c *Campaign) Done() {
 	c.Status = Done
+	c.UpdatedOn = time.Now()
 }
 
 func (c *Campaign) Cancel() {
 	c.Status = Canceled
+	c.UpdatedOn = time.Now()
 }
 
 func (c *Campaign) Delete() {
 	c.Status = Deleted
+	c.UpdatedOn = time.Now()
 }
 
 func (c *Campaign) Fail() {
 	c.Status = Failed
+	c.UpdatedOn = time.Now()
 }
 
 func (c *Campaign) Started() {
 	c.Status = Started
+	c.UpdatedOn = time.Now()
 }
 
 
