@@ -112,26 +112,13 @@ func (s *ServiceImp) SendEmailAndUpdateStatus(campaignSaved *Campaign) {
 
 // Todo make unit test
 func (s *ServiceImp) Start(id string) error {
-	campaignSaved, err := s.Repository.GetBy(id)
+	campaignSaved, err := s.getAndValidateStatusIsPending(id)
 
 	if err != nil {
-		return internalerrors.ProcessErrorToReturn(err)
+		return err
 	}
 
-	if campaignSaved.Status != Pending {
-		return errors.New("Campaign status invalid")
-	}
-
-	go func() {
-		err = s.SendMail(campaignSaved)
-
-		if err != nil {
-			campaignSaved.Fail()
-		} else {
-			campaignSaved.Done()
-		}
-		err = s.Repository.Update(campaignSaved)
-	}()
+	go s.SendEmailAndUpdateStatus(campaignSaved)
 
 	campaignSaved.Started()
 	err = s.Repository.Update(campaignSaved)
@@ -140,4 +127,17 @@ func (s *ServiceImp) Start(id string) error {
 	}
 
 	return nil
+}
+
+func (s *ServiceImp) getAndValidateStatusIsPending(id string) (*Campaign, error) {
+	campaign, err := s.Repository.GetBy(id)
+
+	if err != nil {
+		return nil, internalerrors.ProcessErrorToReturn(err)
+	}
+
+	if campaign.Status != Pending {
+		return nil, errors.New("Campaign status invalid")
+	}
+	return campaign, nil
 }
